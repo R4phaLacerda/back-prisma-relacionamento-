@@ -10,8 +10,8 @@ collectionRouter.get("/", CollectionController.getAllCollections);
 // GET /coleções/:id - Obter um anime pelo ID
 // collectionRouter.get("/:id", CollectionController.getAnimeById);
 
-// POST /api/collections - Criar um novo anime
-// collectionRouter.post("/", CollectionController.createAnime);
+// POST /collections - Criar uma nova colecao
+collectionRouter.post("/", CollectionController.createCollection);
 
 // PUT /api/collections/:id - Atualizar um anime
 // collectionRouter.put("/:id", CollectionController.updateAnime);

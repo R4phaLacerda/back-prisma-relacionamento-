@@ -30,58 +30,36 @@ class CollectionController {
     }
   }
 
-  // POST /api/animes
-  async createAnime(req, res) {
+  // POST /colecoes
+  async createCollection(req, res) {
     try {
       // Validação básica
       const {
-        title,
+        name,
         description,
-        episodes,
         releaseYear,
-        studio,
-        genres,
-        rating,
-        imageUrl,
       } = req.body;
 
-      // Verifica se o título do anime foi fornecido
-
-      if (
-        !title ||
-        !description ||
-        !episodes ||
-        !releaseYear ||
-        !studio ||
-        !genres ||
-        !rating ||
-        !imageUrl
-      ) {
-        return res
-          .status(400)
-          .json({ error: "Todos os campos são obrigatórios" });
+      // Verifica se todos os campos foram fornecidos
+      if (!name || !releaseYear) {
+        return res.status(400).json({ error: "Os campos nome e ano de lançamento são obrigatórios" });
       }
 
-      // Criar o novo anime
-      const newAnime = await AnimeModel.create(
-        title,
+      // Criar a nova coleção
+      const newCollection = await CollectionModel.create(
+        name,
         description,
-        episodes,
-        releaseYear,
-        studio,
-        genres,
-        rating,
-        imageUrl
+        releaseYear
       );
 
-      if (!newAnime) {
-        return res.status(400).json({ error: "Erro ao criar anime" });
+      if (!newCollection) {
+        return res.status(400).json({ error: "Erro ao criar coleção" });
       }
 
-      res.status(201).json(newAnime);
+      res.status(201).json(newCollection);
     } catch (error) {
-      console.error("Erro ao criar anime:", error);
-      res.status(500).json({ error: "Erro ao criar anime" });
+      console.error("Erro ao criar coleção:", error);
+      res.status(500).json({ error: "Erro ao criar coleção" });
     }
   }
 

@@ -7,9 +7,10 @@ class CollectionModel {
     orderBy: {
       createdAt: "desc",
     },
+    include: {
+      cards: true,
+    },
   });
-
-  console.log(colecoes);
 
   return colecoes;
 }
@@ -25,31 +26,17 @@ class CollectionModel {
     return anime;
   }
 
-  // Criar um novo anime
-  async create(
-    title,
-    description,
-    episodes,
-    releaseYear,
-    studio,
-    genres,
-    rating,
-    imageUrl
-  ) {
-    const newAnime = await prisma.anime.create({
+  // Criar uma nova coleção
+  async create(name, description, releaseYear,) {
+    const newCollection = await prisma.collection.create({
       data: {
-        title,
+        name,
         description,
-        episodes,
         releaseYear,
-        studio,
-        genres,
-        rating,
-        imageUrl,
       },
     });
 
-    return newAnime;
+    return newCollection;
   }
 
   // Atualizar um anime
