@@ -7,8 +7,8 @@ const collectionRouter = express.Router();
 // GET / colecoes - Listar todas as  colecoes
 collectionRouter.get("/", CollectionController.getAllCollections);
 
-// GET /coleções/:id - Obter um anime pelo ID
-// collectionRouter.get("/:id", CollectionController.getAnimeById);
+//GET /colecoes/:id - Obter Coleção pelo ID
+ collectionRouter.get("/:id", CollectionController.getCollectionById);
 
 // POST /collections - Criar uma nova colecao
 collectionRouter.post("/", CollectionController.createCollection);

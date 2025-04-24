@@ -12,21 +12,21 @@ class CollectionController {
     }
   }
 
-  // GET /api/animes/:id
-  async getAnimeById(req, res) {
+  // GET/colecoes/:id
+  async getCollectionById(req, res) {
     try {
       const { id } = req.params;
 
-      const anime = await AnimeModel.findById(id);
+      const colecao = await CollectionModel.findById(id);
 
-      if (!anime) {
-        return res.status(404).json({ error: "Anime não encontrado" });
+      if (!colecao) {
+        return res.status(404).json({ error: "Coleção não encontrado" });
       }
 
-      res.json(anime);
+      res.json(colecao);
     } catch (error) {
-      console.error("Erro ao buscar anime:", error);
-      res.status(500).json({ error: "Erro ao buscar anime" });
+      console.error("Erro ao buscar coleção:", error);
+      res.status(500).json({ error: "Erro ao buscar coleção!" });
     }
   }
 
@@ -56,7 +56,10 @@ class CollectionController {
         return res.status(400).json({ error: "Erro ao criar coleção" });
       }
 
-      res.status(201).json(newCollection);
+      res.status(201).json({
+        message: "Coleção criada com sucesso!",
+        newCollection
+      });
     } catch (error) {
       console.error("Erro ao criar coleção:", error);
       res.status(500).json({ error: "Erro ao criar coleção" });

@@ -15,20 +15,23 @@ class CollectionModel {
   return colecoes;
 }
 
-  // Obter um anime pelo ID
+  // Obter uma coleção pelo ID
   async findById(id) {
-    const anime = await prisma.anime.findUnique({
+    const colecao = await prisma.collection.findUnique({
       where: {
         id: Number(id),
+      },
+      include: {
+        cards: true,
       },  
     });
 
-    return anime;
+    return colecao;
   }
 
   // Criar uma nova coleção
   async create(name, description, releaseYear,) {
-    const newCollection = await prisma.collection.create({
+    const novaColecao = await prisma.collection.create({
       data: {
         name,
         description,
@@ -36,24 +39,19 @@ class CollectionModel {
       },
     });
 
-    return newCollection;
+    return novaColecao;
   }
 
-  // Atualizar um anime
+  // Atualizar uma coleção
   async update(
     id,
-    title,
+    name,
     description,
-    episodes,
     releaseYear,
-    studio,
-    genres,
-    rating,
-    imageUrl
   ) {
-    const anime = await this.findById(id);
+    const colecao = await this.findById(id);
 
-    if (!anime) {
+    if (!colecao) {
       return null;
     }
 
