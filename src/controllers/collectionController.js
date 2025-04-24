@@ -66,61 +66,54 @@ class CollectionController {
     }
   }
 
-  // PUT /api/animes/:id
-  async updateAnime(req, res) {
+  // PUT/colecoes/:id
+  async updateCollection(req, res) {
+    const { id } = req.params;
+    const {
+      name,
+      description,
+      releaseYear,
+    } = req.body;
     try {
-      const { id } = req.params;
-      const {
-        title,
-        description,
-        episodes,
-        releaseYear,
-        studio,
-        genres,
-        rating,
-        imageUrl,
-      } = req.body;
 
-      // Atualizar o anime
-      const updatedAnime = await AnimeModel.update(
+
+      // Atualizar colecao
+      const updatedCollection = await CollectionModel.update(
         id,
-        title,
+        name,
         description,
-        episodes,
         releaseYear,
-        studio,
-        genres,
-        rating,
-        imageUrl
       );
 
-      if (!updatedAnime) {
-        return res.status(404).json({ error: "Anime não encontrado" });
+      if (!updatedCollection) {
+        return res.status(404).json({ error: "Coleção não encontrado" });
       }
 
-      res.json(updatedAnime);
+      res.json(updatedCollection);
     } catch (error) {
-      console.error("Erro ao atualizar anime:", error);
-      res.status(500).json({ error: "Erro ao atualizar anime" });
+      console.error("Erro ao atualizar coleção:", error);
+      res.status(500).json({ error: "Erro ao atualizar coleção!" });
     }
   }
 
-  // DELETE /api/animes/:id
-  async deleteAnime(req, res) {
+  // DELETE /colecoes/:id
+  async deleteCollection(req, res) {
     try {
       const { id } = req.params;
 
-      // Remover o anime
-      const result = await AnimeModel.delete(id);
+      // Remover a colecao
+      const result = await CollectionModel.delete(id);
 
       if (!result) {
-        return res.status(404).json({ error: "Anime não encontrado" });
+        return res.status(404).json({ error: "Coleção não encontrado" });
       }
 
-      res.status(204).end(); // Resposta sem conteúdo
+      res.status(200).json({ 
+        message: "Coleção removida com sucesso!" 
+      });
     } catch (error) {
-      console.error("Erro ao remover anime:", error);
-      res.status(500).json({ error: "Erro ao remover anime" });
+      console.error("Erro ao remover coleção:", error);
+      res.status(500).json({ error: "Erro ao remover coleção" });
     }
   }
 }

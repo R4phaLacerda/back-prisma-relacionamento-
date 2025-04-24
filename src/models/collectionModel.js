@@ -55,51 +55,40 @@ class CollectionModel {
       return null;
     }
 
-    // Atualize o anime existente com os novos dados
-    const data = {};
-    if (title !== undefined) {
-      data.title = title;
+    // Atualize a colecao existente com os novos dados
+
+    if (name !== undefined) {
+      name = name;
     }
     if (description !== undefined) {
-      data.description = description;
-    }
-    if (episodes !== undefined) {
-      data.episodes = episodes;
+      description = description;
     }
     if (releaseYear !== undefined) {
-      data.releaseYear = releaseYear;
-    }
-    if (studio !== undefined) {
-      data.studio = studio;
-    }
-    if (genres !== undefined) {
-      data.genres = genres;
-    }
-    if (rating !== undefined) {
-      data.rating = rating;
-    }
-    if (imageUrl !== undefined) {
-      data.imageUrl = imageUrl;
+      releaseYear = releaseYear;
     }
 
-    const animeUpdate = await prisma.anime.update({
+    const colecaoAtualizada = await prisma.collection.update({
       where: {
         id: Number(id),
       },
-      data,
-    });
-    
-    return anime;
+      data: {
+        name,
+        description,
+        releaseYear,
+      },
+    })
+
+    return colecaoAtualizada;
   }
 
-  // Remover um anime
+  // Remover uma colecao
   async delete(id) {
-    const anime = this.findById(id);
-    if (!anime) {
+    const colecao = this.findById(id);
+    if (!colecao) {
       return null;
     }
 
-    await prisma.anime.delete({
+    await prisma.collection.delete({
       where: {
         id: Number(id)
       },

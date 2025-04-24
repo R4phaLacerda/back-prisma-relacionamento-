@@ -4,19 +4,19 @@ import CollectionController from "../controllers/collectionController.js";
 const collectionRouter = express.Router();
 
 // Rotas de coleções
-// GET / colecoes - Listar todas as  colecoes
+// GET / colecoes - Listar todas as  Coleções
 collectionRouter.get("/", CollectionController.getAllCollections);
 
 //GET /colecoes/:id - Obter Coleção pelo ID
  collectionRouter.get("/:id", CollectionController.getCollectionById);
 
-// POST /collections - Criar uma nova colecao
+// POST /colecoes - Criar uma nova Coleção
 collectionRouter.post("/", CollectionController.createCollection);
 
-// PUT /api/collections/:id - Atualizar um anime
-// collectionRouter.put("/:id", CollectionController.updateAnime);
+// PUT /colecoes/:id - Atualizar uma Coleção
+collectionRouter.put("/:id", CollectionController.updateCollection);
 
-// DELETE /api/collections/:id - Remover um anime
-// collectionRouter.delete("/:id", CollectionController.deleteAnime);
+// DELETE /colecoes/:id - Remover uma Coleção
+collectionRouter.delete("/:id", CollectionController.deleteCollection);
 
 export default collectionRouter;
